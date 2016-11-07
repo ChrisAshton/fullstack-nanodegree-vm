@@ -1,9 +1,16 @@
-<html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+</head>
     <body>
-        <h1>New Menu Item for {{restaurantname}}</h1>
-        <form action="{{ url_for('newMenuItem', restaurant_id=restaurant_id) }}" method="post">
-            <p>Name:</p>
-            <input type="text" size="30" name="name">
+        <h2>New Menu Item for {{restaurant.name}}</h2>
+        <form action="{{url_for('newMenuItem', restaurant_id=restaurant_id)}}" method="post">
+            <p><h3>Name:</h3>
+            <input type="text" size="30" name="name" placeholder="A descriptive, fun name">
+            <p><h3>Description:</h3>
+            <input type="text" size="30" name="description" placeholder="Describe the entree here">
+            <p><h3>Price:</h3>
+            <input type="text" size="30" name="Price" placeholder="format: $dd.cc">
             <input type="submit" value="Create">
         </form>
     </body>

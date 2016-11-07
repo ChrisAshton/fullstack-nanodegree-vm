@@ -28,11 +28,11 @@ def newMenuItem(restaurant_id):
         newItem = MenuItem(name=request.form['name'], restaurant_id=restaurant_id)
         session.add(newItem)
         session.commit()
-        flash("new menu item created: %s. (be sure to edit the description and price)" % newItem.name)
+        flash("new menu item created: %s" % newItem.name)
         return redirect(url_for('restaurantMenu', restaurant_id=restaurant_id))
 
     else:
-        return render_template('newmenuitem.html', restaurant_id=restaurant_id)
+        return render_template('newmenuitem.html', restaurant_id=restaurant_id, restaurant=restaurant)
 
 
 @app.route('/restaurants/<int:restaurant_id>/<int:menu_id>/edit_menu_item', methods=['GET','POST'])
@@ -60,6 +60,7 @@ def deleteMenuItem(restaurant_id, menu_id):
     if request.method == 'POST':
         session.delete(menu_item)
         session.commit()
+        flash("% has been deleted" % menu_item.name)
         return redirect(url_for('restaurantMenu', restaurant_id=restaurant_id))
     else:
         return render_template('deletemenuitem.html', restaurant_id=restaurant_id, menu_id=menu_id, item=menu_item, restaurant=restaurant)
